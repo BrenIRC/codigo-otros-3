@@ -10,51 +10,47 @@ const productos = [
 
 // Añado los elementos del DOM de forma correcta
 const listaProductos = document.getElementById("lista-de-productos");
-const textoFiltro = document.getElementById("input-filtro");
-const botonFiltrar = document.getElementById("boton-filtrar");
+const textoFiltro = document.getElementById("textoFiltro"); // Corregido
+const botonFiltrar = document.getElementById("botonFiltrar"); // Corregido
 
-
-// Defino la función para poder mostrar los productos
+// Defino la función para poder motsrar los productos
 function mostrarProductos(productos) {
   // funsión para limpiar lista de productos
   listaProductos.innerHTML = "";
 
   //Agregar cada prodcto al DOM
-for (let i = 0; i < productos.length; i++) {
+  for (let i = 0; i < productos.length; i++) {
 
-  //Traigo cada elemento
-  const producto = productos[i];
+    //Traigo caad elemento
+    const producto = productos[i];
 
-//cambio var por const
-  const d = document.createElement("div");
-  d.classList.add("producto");
+    //cambio var por const
+    const d = document.createElement("div");
+    d.classList.add("producto");
 
-  //Cambio var por const
+    //Cambio var por const
+    const ti = document.createElement("p");
+    ti.classList.add("titulo");
+    //Traigo cada producto de la lista
+    ti.textContent = producto.nombre;
 
-  const ti = document.createElement("p");
-  ti.classList.add("titulo");
-  //Traigo cada producto de la lista
-  ti.textContent = producto.nombre
+    //Imagen de producto
+    const imagen = document.createElement("img");
+    //traer la imagen para mostrar
+    imagen.setAttribute("src", producto.img);
+    imagen.setAttribute("alt", producto.nombre);
 
-  //Imagen de producto 
-  
-  const imagen = document.createElement("img");
-  //traer la imagen para mostrar
-  imagen.setAttribute("src", producto.img);
-  imagen.setAttribute("alt", producto.nombre);
+    d.appendChild(ti);
+    d.appendChild(imagen);
 
-
-  d.appendChild(ti)
-  d.appendChild(imagen)
-
-// Agregar el método
-listaProductos.appendChild(d);
-}
+    // Agregr el método
+    listaProductos.appendChild(d);
+  }
 }
 
 //Añado funcion para añadir productos
 function filtrarProductos(productos, texto) {
-  // Filtar segun lo que le usuario ingerse
+  // Filtar segun lo que le usuario ingrese
   return productos.filter((producto) => {
     return (
       producto.tipo.toLowerCase().includes(texto.toLowerCase()) ||
@@ -63,12 +59,12 @@ function filtrarProductos(productos, texto) {
   });
 }
 
-// Se muestran los productos cunaod se ingresa a la página
+// Se muestran los productos cuando se ingresa a la página
 mostrarProductos(productos);
 
 // Añado evento de filtrar de forma correcta
 botonFiltrar.addEventListener("click", function () {
-  const textoFiltro = inputFiltro.value.trim(); // Obtiene el texto del input
-  const productosFiltrados = filtrarProductos(productos, textoFiltro); // Aplica el filtro
+  const texto = textoFiltro.value.trim(); // Obtiene el texto del input (corregido)
+  const productosFiltrados = filtrarProductos(productos, texto); // Aplica el filtro
   mostrarProductos(productosFiltrados); // Muestra los productos filtrados
 });
